@@ -36,3 +36,6 @@ function performSearch(event) {
         alert('Please enter a search term');
     }
 }
+
+
+

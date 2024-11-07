@@ -616,14 +616,19 @@
     .footer-col {
         margin-bottom: 20px;
         text-align: center;
+        justify-content: center;
     }
 
     .social-links {
         justify-content: center;
     }
+    .footer-bottom{
+        justify-content: center;
+    }
 }
 
 .footer-bottom {
+    
     text-align: center;
     padding: 10px 0;
     background-color: #222; /* Darker background for separation */

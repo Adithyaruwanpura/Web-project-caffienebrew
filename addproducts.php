@@ -13,9 +13,9 @@
             <h3 class="heading">
                 Add Products
             </h3>
-            <form action="addproducts.php" method="post" class="addproduct" enctype="multipart/form-data">
+            <form action="admin-page.php" method="post" class="addproduct" enctype="multipart/form-data">
                 <input type="text" name="productname" placeholder="Product Name" required class="infield">
-                <input type="text" name="productprice" placeholder="Product Price" required class="infield">
+                <input type="text" name="productprice" placeholder="Product Price" min="0" required class="infield">
                 <select name="category" class="infield" required>
                     <option value="" disabled selected>Select Category</option>
                     <option value="Coffees">Coffees</option>
@@ -32,31 +32,39 @@
 </body>
 </html>
 
+<!-- updated -->
 <?php
     include 'connection.php';
-    if(isset($_POST['addproduct'])){
-        $productname=$_POST['productname'];
-        $productprice=$_POST['productprice'];
-        $category=$_POST['category'];
-        $productimage=$_FILES['productimage']['name'];
-        $tempname=$_FILES['productimage']['tmp_name'];
-        $productImgFolder='proImg/'.$productimage;
 
-        //insert querry
+    if (isset($_POST['addproduct'])) {
+        // Retrieve and sanitize input data
+        $productname = $_POST['productname'];
+        $productprice = (float) $_POST['productprice'];
+        $category = $_POST['category'];
+        $productimage = $_FILES['productimage']['name'];
+        $tempname = $_FILES['productimage']['tmp_name'];
+        $productImgFolder = 'proImg/' . $productimage;
 
-        $insertquery = mysqli_query($conn,"INSERT INTO products(name,price,category,img) VALUES('$productname','$productprice','$category','$productimage')") or die("Failed to insert data into database");
-        if($insertquery){
-            move_uploaded_file($tempname,$productImgFolder);
-            $dismessage = "Product added successfully";
+        // Validation for price
+        if ($productprice <= 0) {
+            echo "<script>alert('Invalid price. Please enter a positive number.');</script>";
+        } else {
+            // Insert query
+            $insertquery = mysqli_query(
+                $conn,
+                "INSERT INTO products(name, price, category, img) VALUES('$productname', '$productprice', '$category', '$productimage')"
+            ) or die("Failed to insert data into database");
+
+            if ($insertquery) {
+                // Move the uploaded image to the designated folder
+                move_uploaded_file($tempname, $productImgFolder);
+                $dismessage = "Product added successfully";
+            } else {
+                $dismessage = "Failed to insert product";
+            }
+
+            // Show success or failure message
+            echo "<script>alert('$dismessage');</script>";
         }
-        else{
-            $dismessage = "Failed to insert product";
-        }
-    }
-?>
-
-<?php
-    if (isset($dismessage)) {
-        echo "<script>alert('$dismessage');</script>";  // Show JavaScript alert box with $dismessage
     }
 ?>

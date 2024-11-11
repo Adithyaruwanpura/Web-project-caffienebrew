@@ -11,7 +11,7 @@
         <form method="post">
             <h2>Register</h2>
             <input type="text" name="username" required placeholder="User Name" class="box"> 
-            <input type="text" name="email" required placeholder="Enter your Email" class="box">
+            <input type="email" name="email" required placeholder="Enter your Email" class="box">
             <input type="password" name="password" required placeholder="Password" class="box">
             <input type="submit" name="register" value="Register Now" class="btn">
             <p> Already have an account? <a href="login.php">Login Now</a></p>

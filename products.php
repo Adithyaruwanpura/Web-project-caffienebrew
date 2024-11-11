@@ -23,8 +23,9 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="main-page.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link " href="about-page.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact-page.html">Contact Us</a></li>
-                <li class="nav-item"><a class="nav-link active" href="#">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="contactusDetails.php">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link active" href="products.php">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
     <!-- Cart and Search Icons -->
     <li class="nav-item">
         <form class="search-form" onsubmit="performSearch(event)">
@@ -43,6 +44,23 @@
                 <p>Choose from our delicious selection</p>
             </div>
         </section>
+    
+        <section class="menu-section container my-5">
+    <div class="row">
+       
+            <!-- Sidebar for categories -->
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item" onclick="filterProducts('coffee')">Coffee</li>
+            <li class="list-group-item" onclick="filterProducts('ice-cream')">Ice Cream</li>
+            <li class="list-group-item" onclick="filterProducts('cakes')">Cakes</li>
+            <li class="list-group-item" onclick="filterProducts('buns')">Buns</li>
+            <li class="list-group-item" onclick="filterProducts('pizza')">Pizza</li>
+            <li class="list-group-item" onclick="filterProducts('bubble-tea')">Bubble Tea</li>
+            <li class="list-group-item" onclick="filterProducts('juice')">Juice</li>
+        </ul>
+    </div>
+    
     <?php
         include 'connection.php';
         // SQL query to fetch all products from the database

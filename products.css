@@ -64,7 +64,7 @@ body, h1, h2, h3, p {
     padding-top: 30px;
     padding-bottom: 15px;
     width: 100%;
-    max-width: 240px;
+    max-width: 400px;
     margin: 20px auto;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -127,6 +127,36 @@ body, h1, h2, h3, p {
 
 .search-button:hover {
     color: #ff8800;
+}
+
+/* Sidebar Styles */
+.list-group {
+    flex: 0 0 250px; /* Fixed width for the sidebar */
+    max-width: 250px;
+    min-width: 200px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #f8f9fa; /* Light background for the sidebar */
+    border: 1px solid #dee2e6; /* Light border around the sidebar */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside the sidebar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.list-group-item {
+    
+    background-color: transparent; /* Transparent background for items */
+    border: none; /* Remove border from items */
+    font-weight: bold; /* Bold text for items */
+    color: #333; /* Dark text color */
+    cursor: pointer; /* Pointer cursor for clickable items */
+    transition: background-color 0.3s, color 0.3s; /* Transition for hover effects */
+}
+
+.list-group-item:hover {
+    background-color: #e2e6ea; /* Light gray background on hover */
+    color: #ff8800; /* Change text color on hover */
 }
 
 /* Footer Styling */

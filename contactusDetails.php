@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Page - Caffeine Brew</title>
+    <title>Contact Us</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -24,7 +24,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a class="nav-link" href="main-page.html">Home</a></li>
             <li class="nav-item"><a class="nav-link  " href="about-page.html">About</a></li>
-            <li class="nav-item"><a class="nav-link active" href="#">Contact Us</a></li>
+            <li class="nav-item"><a class="nav-link active" href="contactusDetails.php">Contact Us</a></li>
             <li class="nav-item"><a class="nav-link"  href="products.php">Products</a></li>
             <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
 <!-- Cart and Search Icons -->
@@ -69,24 +69,24 @@
         <!-- Contact Form -->
         <div class="col-md-6">
             <h3 class="section-title">Your Details</h3>
-            <form id="contactForm" onsubmit="return validateForm()">
+            <form id="contactForm" onsubmit="return validateForm()" method="POST">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
                 </div>
                 <div class="form-group">
                     <label for="message">Comment / Questions</label>
-                    <textarea class="form-control" id="message" rows="4" placeholder="Write your message here"></textarea>
+                    <textarea class="form-control" id="message" rows="4" name ="comment" placeholder="Write your message here"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Contact Us</button>
+                <button type="submit" class="btn btn-primary" name="submit">Contact Us</button>
             </form>
         </div>
     </div>
@@ -118,10 +118,10 @@
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Products</a></li>
+                    <li><a href="main-page.html">Home</a></li>
+                    <li><a href="about-page.html">About</a></li>
+                    <li><a href="contactusDetails.php">Contact</a></li>
+                    <li><a href="products.php">Products</a></li>
                 </ul>
             </div>
 
@@ -161,3 +161,24 @@
     <script src="contact-page.js"></script>
 </body>
 </html>
+
+
+<?php 
+    include ('connection.php'); 
+    if(isset($_POST['submit'])){
+        $name =$_POST['name'];
+        $email = $_POST['email'];
+        $subject = $_POST['subject'];
+        $comment = $_POST['comment'];
+        $query = mysqli_query($conn, "INSERT INTO contactus (name, email, subject, comment) VALUES ('$name', '$email', '$subject', '$comment')");
+        if($query){
+            echo "<script> alert('Thank You for your feedback !'); </script>";
+        }
+        else{
+            echo "Error: ".mysqli_error($conn);
+        }
+    }
+
+
+
+?>

@@ -39,7 +39,7 @@
             header("location: main-page.html");
             exit();
         } else {
-            echo "Invalid username or password";
+            echo "<script>alert('Invalid username or password')</script>";
         }
         $stmt->close();
     }    

@@ -74,12 +74,12 @@
                 echo '<div class="product-card">';
                 echo '<img src="proImg/' . $row['img'] . '" alt="' . $row['name'] . '" class="product-image">';
                 echo '<h3 class="product-name">' . $row['name'] . '</h3>';
-                echo '<p class="product-price">' . $row['price'] . '</p>';
+                echo '<p class="product-price">' ."$". $row['price'] . '</p>';
                 echo '<div class="btn">Add to Cart</div>';
                 echo '</div>';
             }
         } else {
-            echo "<p>No products found!</p>";
+            echo "<script>alert('No products found!');</script>";
         }
 
         // Close the database connection

@@ -96,7 +96,7 @@
 <section class="reservation-section text-center py-5">
     <h3 class="reservation-title">Reserve A Table Now</h3>
     <p class="reservation-description">Enjoy a cozy experience with our delightful range of treats and freshly brewed coffee.</p>
-    <button class="btn btn-warning reservation-btn">Make a Reservation</button>
+    <a href="reservation.php" class="btn btn-warning reservation-btn">Make a Reservation</a>
 </section>
 <br>
 

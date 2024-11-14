@@ -13,7 +13,7 @@
             <h3 class="heading">
                 Add Products
             </h3>
-            <form action="admin-page.php" method="post" class="addproduct" enctype="multipart/form-data">
+            <form action="addproducts.php" method="post" class="addproduct" enctype="multipart/form-data">
                 <input type="text" name="productname" placeholder="Product Name" required class="infield">
                 <input type="text" name="productprice" placeholder="Product Price" min="0" required class="infield">
                 <select name="category" class="infield" required>

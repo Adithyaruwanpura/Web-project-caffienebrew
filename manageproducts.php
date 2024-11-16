@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>Manage Products</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="manageproducts.css"> 
@@ -59,6 +59,12 @@ if (mysqli_num_rows($result) > 0) {
         echo '<form action="manageproducts.php" method="POST">';
         echo '<input type="hidden" name="product_name" value="' . htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') . '">';
         echo '<button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>';
+        echo '</form>';
+        
+
+        echo '<form action="editproduct.php" method="GET">';
+        echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($row['pid'], ENT_QUOTES, 'UTF-8') . '">';
+        echo '<button type="submit" class="edit-button"><i class="fas fa-edit"></i></button>'; // Ensure product ID is used
         echo '</form>';
         echo '</div>';
     }

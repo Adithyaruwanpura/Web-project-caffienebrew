@@ -21,6 +21,10 @@
                     <option value="Coffees">Coffees</option>
                     <option value="Buns">Buns</option>
                     <option value="Icecreams">Icecreams</option>
+                    <option value="Cakes">Cakes</option>
+                    <option value="Pizza">Pizza</option>
+                    <option value="Bubble Tea">Bubble Tea</option>
+                    <option value="Juice">Juice</option>
                 </select>
                 <input type = "file" name = "productimage" required class="infield" accept="image/jpg,image/jpeg,image/png">
                 <br>

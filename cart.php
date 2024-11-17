@@ -34,32 +34,38 @@
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    <?php
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $product_id = $row['cid'];
-                            $product_name = $row['name'];
-                            $product_price = $row['price'];
-                            $product_quantity = $row['quantity'];
-                            $total_price = $product_price * $product_quantity;
+                <tbody>
+                <?php
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $product_id = $row['cid'];
+                        $product_name = $row['name'];
+                        $product_price = $row['price'];
+                        $product_quantity = $row['quantity'];
+                        $total_price = $product_price * $product_quantity;
 
-                            // Add the total price of this product to the grand total
-                            $grandTotal += $total_price;
+                        // Add the total price of this product to the grand total
+                        $grandTotal += $total_price;
 
-                            echo "<tr>";
-                            echo "<td>{$product_id}</td>";
-                            echo "<td>{$product_name}</td>";
-                            echo "<td>\${$product_price}</td>";
-                            echo "<td>{$product_quantity}</td>";
-                            echo "<td>\${$total_price}</td>";
-                            echo "<td><button class='btn btn-danger' onclick='removeFromCart({$product_id})'>Remove</button></td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<script>alert('No items in the cart');</script>";
+                        echo "<tr id='product-{$product_id}'>";
+                        echo "<td>{$product_id}</td>";
+                        echo "<td>{$product_name}</td>";
+                        echo "<td>\${$product_price}</td>";
+                        echo "<td>
+                                <button onclick='changeQuantity({$product_id}, -1)' class='btn btn-sm btn-secondary'>-</button>
+                                <span id='quantity-{$product_id}'>{$product_quantity}</span>
+                                <button onclick='changeQuantity({$product_id}, 1)' class='btn btn-sm btn-secondary'>+</button>
+                            </td>";
+                        echo "<td id='total-{$product_id}'>\${$total_price}</td>";
+                        echo "<td><button class='btn btn-danger' onclick='removeFromCart({$product_id})'>Remove</button></td>";
+                        echo "</tr>";
                     }
-                    ?>
+                } else {
+                    echo "<script>alert('No items in the cart');</script>";
+                }
+                ?>
                 </tbody>
+
             </table>
             <div class="total-price">
                 <!-- Display the calculated grand total -->
@@ -85,6 +91,49 @@
                 window.location.href = 'clear-cart.php';
             }
         }
+
+        function updateGrandTotal() {
+        let grandTotal = 0;
+        document.querySelectorAll('tbody tr').forEach(row => {
+            const totalCell = row.querySelector('td:nth-child(5)');
+            if (totalCell) {
+                grandTotal += parseFloat(totalCell.textContent.replace('$', ''));
+            }
+        });
+            document.getElementById('total-price').textContent = `Total Price: $${grandTotal.toFixed(2)}`;
+        }
+
+
+        function changeQuantity(productId, change) {
+        const quantityElement = document.getElementById(`quantity-${productId}`);
+        let currentQuantity = parseInt(quantityElement.textContent);
+
+        // Prevent quantity from dropping below 1
+        if (currentQuantity + change < 1) {
+            alert('Quantity cannot be less than 1.');
+            return;
+        }
+
+        // Update the quantity in the cart
+        currentQuantity += change;
+
+        // Send an AJAX request to update the server-side quantity
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'update-cart.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (this.status === 200) {
+                // Update the UI
+                quantityElement.textContent = currentQuantity;
+                document.getElementById(`total-${productId}`).textContent = `$${parseFloat(this.responseText).toFixed(2)}`;
+
+                // Optionally, update the grand total here
+                updateGrandTotal();
+            }
+        };
+        xhr.send(`id=${productId}&quantity=${currentQuantity}`);
+    }
+
     </script>
 </body>
 </html>

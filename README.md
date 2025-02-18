@@ -12,7 +12,10 @@ The project is a **fully functional café management system** with a user-friend
 👩‍💻 **Adithya Ruwanpura**  
 - UI/UX Design  
 - Front-End Development  
-- Partial Back-End Development  
+- Partial Back-End Development
+
+👥 **Other Team Members (Add Names & Roles)**  
+- Imesh Gimshan- Backend Development  
 
 ## 🚀 Features  
 ✅ User Authentication (Login/Register)  
